@@ -30,6 +30,10 @@ curl -H "x-api-key: tg_..." "https://gdzlcxskuhupymyxywzm.supabase.co/functions/
 Examples: [JavaScript](examples/guard.mjs) · [Python](examples/guard.py). Also available pay-per-call over x402 and as an MCP server (`io.github.ryosukedesigner-cmd/tokenguard`).
 
 
+## Detection engine (open source, MIT)
+
+The on-chain analysis is public: [engine/](engine/) (`sol.ts` for Solana and Token-2022, `evm.ts` for BNB Chain, Base and Ethereum). Accuracy is measured in public: every benchmarked token shows its verdict at listing and what happened 24 h later.
+
 ## Integrations (AI agents and bots)
 
 | Package | For | Folder |
@@ -46,3 +50,7 @@ Browser extension: https://tokenguard-bot.vercel.app/extension/
 [![TokenGuard verdict](https://gdzlcxskuhupymyxywzm.supabase.co/functions/v1/tokenguard/badge?m=JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN)](https://tokenguard-bot.vercel.app/badge/)
 
 Automated on-chain risk signals, not financial advice.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
