@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tokenguard-client"
+version = "1.0.0"
+description = "Rug check for Solana, BNB Chain, Base and Ethereum tokens before you buy: SAFE / CAUTION / DANGER, honeypot sell test, creator record. Standard library only."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["solana", "rug", "rugcheck", "honeypot", "token", "scam", "pump.fun", "memecoin", "trading-bot", "ai-agent"]
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Topic :: Security", "Topic :: Office/Business :: Financial :: Investment"]
+
+[project.urls]
+Homepage = "https://tokenguard-bot.vercel.app"
+Source = "https://github.com/ryosukedesigner-cmd/tokenguard/tree/main/integrations/tokenguard-python"
+Telegram = "https://t.me/Token_guard_bot"
+
+[tool.setuptools]
+packages = ["tokenguard_client"]

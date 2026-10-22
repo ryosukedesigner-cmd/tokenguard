@@ -37,6 +37,7 @@ Examples: [JavaScript](examples/guard.mjs) · [Python](examples/guard.py). Also 
 | `tokenguard` | any JS/TS bot or backend (no dependencies) | [integrations/tokenguard](integrations/tokenguard) |
 | `solana-agent-kit-plugin-tokenguard` | Solana Agent Kit v2 | [integrations/solana-agent-kit-plugin-tokenguard](integrations/solana-agent-kit-plugin-tokenguard) |
 | `elizaos-plugin-tokenguard` | elizaOS v1 | [integrations/elizaos-plugin-tokenguard](integrations/elizaos-plugin-tokenguard) |
+| `tokenguard-client` (PyPI) | Python bots and backends (standard library only) | [integrations/tokenguard-python](integrations/tokenguard-python) |
 | `goat-plugin-tokenguard` | GOAT SDK (Vercel AI, LangChain, OpenAI Agents…) | [integrations/goat-plugin-tokenguard](integrations/goat-plugin-tokenguard) |
 
 Browser extension: https://tokenguard-bot.vercel.app/extension/
