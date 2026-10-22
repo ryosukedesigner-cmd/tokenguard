@@ -1,0 +1,15 @@
+{
+  "name": "elizaos-plugin-tokenguard",
+  "version": "1.0.0",
+  "description": "elizaOS plugin: rug-pull and honeypot check (SAFE / CAUTION / DANGER) for Solana, BNB Chain, Base and Ethereum tokens.",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "README.md"],
+  "dependencies": { "tokenguard": "^1.0.0" },
+  "peerDependencies": { "@elizaos/core": ">=1" },
+  "keywords": ["elizaos", "eliza", "elizaos-plugins", "plugin", "solana", "rug", "honeypot", "ai-agent"],
+  "agentConfig": { "pluginType": "elizaos:plugin:1.0.0", "pluginParameters": { "TOKENGUARD_API_KEY": { "type": "string", "description": "Optional TokenGuard API key (a free key is created automatically)", "required": false } } },
+  "homepage": "https://tokenguard-bot.vercel.app",
+  "repository": { "type": "git", "url": "git+https://github.com/ryosukedesigner-cmd/tokenguard.git", "directory": "integrations/elizaos-plugin-tokenguard" },
+  "license": "MIT"
+}

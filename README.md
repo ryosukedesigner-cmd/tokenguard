@@ -29,6 +29,18 @@ curl -H "x-api-key: tg_..." "https://gdzlcxskuhupymyxywzm.supabase.co/functions/
 ```
 Examples: [JavaScript](examples/guard.mjs) · [Python](examples/guard.py). Also available pay-per-call over x402 and as an MCP server (`io.github.ryosukedesigner-cmd/tokenguard`).
 
+
+## Integrations (AI agents and bots)
+
+| Package | For | Folder |
+|---|---|---|
+| `tokenguard` | any JS/TS bot or backend (no dependencies) | [integrations/tokenguard](integrations/tokenguard) |
+| `solana-agent-kit-plugin-tokenguard` | Solana Agent Kit v2 | [integrations/solana-agent-kit-plugin-tokenguard](integrations/solana-agent-kit-plugin-tokenguard) |
+| `elizaos-plugin-tokenguard` | elizaOS v1 | [integrations/elizaos-plugin-tokenguard](integrations/elizaos-plugin-tokenguard) |
+| `goat-plugin-tokenguard` | GOAT SDK (Vercel AI, LangChain, OpenAI Agents…) | [integrations/goat-plugin-tokenguard](integrations/goat-plugin-tokenguard) |
+
+Browser extension: https://tokenguard-bot.vercel.app/extension/
+
 ## Badge
 [![TokenGuard verdict](https://gdzlcxskuhupymyxywzm.supabase.co/functions/v1/tokenguard/badge?m=JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN)](https://tokenguard-bot.vercel.app/badge/)
 

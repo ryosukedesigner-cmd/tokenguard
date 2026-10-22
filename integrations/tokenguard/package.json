@@ -1,0 +1,15 @@
+{
+  "name": "tokenguard",
+  "version": "1.0.0",
+  "description": "Rug check for Solana, BNB Chain, Base and Ethereum tokens before you buy: SAFE / CAUTION / DANGER, honeypot sell test, creator record. Free key, no dependencies.",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": { ".": { "types": "./index.d.ts", "default": "./index.js" } },
+  "files": ["index.js", "index.d.ts", "README.md"],
+  "keywords": ["solana", "rug", "rugcheck", "honeypot", "token", "scam", "pump.fun", "memecoin", "security", "trading-bot", "ai-agent"],
+  "homepage": "https://tokenguard-bot.vercel.app",
+  "repository": { "type": "git", "url": "git+https://github.com/ryosukedesigner-cmd/tokenguard.git", "directory": "integrations/tokenguard" },
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}

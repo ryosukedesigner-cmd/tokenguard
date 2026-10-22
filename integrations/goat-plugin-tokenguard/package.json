@@ -1,0 +1,14 @@
+{
+  "name": "goat-plugin-tokenguard",
+  "version": "1.0.0",
+  "description": "GOAT SDK plugin: rug-pull and honeypot check (SAFE / CAUTION / DANGER) before your agent buys a Solana, BNB Chain, Base or Ethereum token.",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "README.md"],
+  "dependencies": { "tokenguard": "^1.0.0" },
+  "peerDependencies": { "@goat-sdk/core": ">=0.4", "zod": ">=3" },
+  "keywords": ["goat-sdk", "goat", "plugin", "solana", "rug", "honeypot", "ai-agent"],
+  "homepage": "https://tokenguard-bot.vercel.app",
+  "repository": { "type": "git", "url": "git+https://github.com/ryosukedesigner-cmd/tokenguard.git", "directory": "integrations/goat-plugin-tokenguard" },
+  "license": "MIT"
+}

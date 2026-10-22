@@ -1,0 +1,14 @@
+{
+  "name": "solana-agent-kit-plugin-tokenguard",
+  "version": "1.0.0",
+  "description": "Solana Agent Kit plugin: rug-pull and honeypot check (SAFE / CAUTION / DANGER) before your agent buys a token.",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "README.md"],
+  "dependencies": { "tokenguard": "^1.0.0" },
+  "peerDependencies": { "zod": ">=3", "solana-agent-kit": ">=2" },
+  "keywords": ["solana-agent-kit", "solana", "ai-agent", "rug", "honeypot", "rugcheck", "plugin"],
+  "homepage": "https://tokenguard-bot.vercel.app",
+  "repository": { "type": "git", "url": "git+https://github.com/ryosukedesigner-cmd/tokenguard.git", "directory": "integrations/solana-agent-kit-plugin-tokenguard" },
+  "license": "MIT"
+}
