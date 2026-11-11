@@ -1,7 +1,7 @@
 """TokenGuard: rug check for Solana, BNB Chain, Base and Ethereum tokens before you buy.
 
 >>> from tokenguard_client import TokenGuard
->>> tg = TokenGuard()                     # free key (50 checks a day) created on first use
+>>> tg = TokenGuard()                     # free key (50 checks a day) created once, kept in ~/.tokenguard/key
 >>> print(tg.summary("https://pump.fun/coin/<MINT>"))
 Standard library only (urllib). Risk signals, not financial advice.
 """
@@ -9,8 +9,9 @@ from __future__ import annotations
 import json, os, re, urllib.error, urllib.request
 
 __all__ = ["TokenGuard", "TokenGuardError", "extract_address", "summarize", "check_token"]
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 DEFAULT_BASE_URL = "https://gdzlcxskuhupymyxywzm.supabase.co/functions/v1/tokenguard"
+KEY_FILE = os.path.join(os.path.expanduser("~"), ".tokenguard", "key")
 _ADDR = re.compile(r"0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44}")
 
 
@@ -45,7 +46,7 @@ def summarize(r: dict) -> str:
 
 class TokenGuard:
     def __init__(self, api_key: str | None = None, base_url: str = DEFAULT_BASE_URL, timeout: float = 30):
-        self.api_key = api_key or os.environ.get("TOKENGUARD_API_KEY", "")
+        self.api_key = api_key or os.environ.get("TOKENGUARD_API_KEY", "") or self._saved_key()
         self.base_url, self.timeout = base_url.rstrip("/"), timeout
 
     def _req(self, path: str, data: dict | None = None, headers: dict | None = None) -> tuple[int, dict]:
@@ -61,13 +62,45 @@ class TokenGuard:
             except ValueError:
                 return e.code, {}
 
+    @staticmethod
+    def _saved_key() -> str:
+        try:
+            with open(KEY_FILE) as f:
+                return f.read().strip()
+        except OSError:
+            return ""
+
     def key(self) -> str:
+        """Your API key. A free key is created on first use and saved in ~/.tokenguard/key, so every run reuses it."""
         if not self.api_key:
             status, j = self._req("/keys", {"contact": "sdk-python"})
             if not j.get("api_key"):
                 raise TokenGuardError(j.get("error", "could not create a free key"), status, j)
             self.api_key = j["api_key"]
+            try:
+                os.makedirs(os.path.dirname(KEY_FILE), exist_ok=True)
+                fd = os.open(KEY_FILE, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+                with os.fdopen(fd, "w") as f:
+                    f.write(self.api_key)
+            except OSError:
+                pass  # read-only home: the key lives for this process only
         return self.api_key
+
+    def usage(self) -> dict:
+        """Plan, daily limit and checks used today."""
+        status, j = self._req("/usage", headers={"x-api-key": self.key()})
+        if status != 200:
+            raise TokenGuardError(j.get("error", f"HTTP {status}"), status, j)
+        return j
+
+    def upgrade(self, plan: str = "trader", network: str = "base") -> dict:
+        """Ask for a paid plan on this key: trader (300 checks a day), starter (2,000) or pro (10,000).
+        Returns the exact USDC amount and the address to send it to (network "base" or "solana").
+        The plan turns on by itself within 30 minutes of the transfer, for 30 days."""
+        status, j = self._req("/upgrade", {"plan": plan, "network": network}, headers={"x-api-key": self.key()})
+        if status != 200 or not j.get("amount_usdc"):
+            raise TokenGuardError(j.get("error", f"HTTP {status}"), status, j)
+        return j
 
     def _get(self, path: str, address: str) -> dict:
         addr = extract_address(address)
@@ -75,7 +108,11 @@ class TokenGuard:
             raise TokenGuardError("no token address found", 400)
         status, j = self._req(f"{path}?address={addr}", headers={"x-api-key": self.key()})
         if status == 429:
-            raise TokenGuardError("daily limit reached: upgrade at https://t.me/Token_guard_bot?start=upgrade", 429, j)
+            up = j.get("upgrade") or {}
+            msg = j.get("error") or "daily limit reached"
+            if up.get("cheapest"):
+                msg += " " + up["cheapest"] + " Call TokenGuard().upgrade() to get the payment details."
+            raise TokenGuardError(msg, 429, j)
         if status != 200 or not j.get("verdict"):
             raise TokenGuardError(j.get("error", f"HTTP {status}"), status, j)
         return j
